@@ -35,4 +35,4 @@ Target yang diverifikasi adalah web. Build Android memerlukan Android SDK yang d
 
 ## Bantuan AI
 
-ChatGPT (OpenAI) digunakan untuk membaca panduan, menyiapkan proyek di laptop, mengimplementasikan halaman, serta membantu pengujian dan dokumentasi. Kode mengikuti pola widget pada Tutorial 08 dengan penyesuaian tata letak untuk layar kecil.
+Saya menggunakan ChatGPT (OpenAI) untuk memeriksa langkah tutorial satu per satu, membantu implementasi dan perbaikan kode, memeriksa hasil pengujian, serta merapikan README. Kode mengikuti pola widget pada Tutorial 08 dengan penyesuaian tata letak untuk layar kecil.
