@@ -23,6 +23,16 @@ Jalankan `dart format --output=none --set-exit-if-changed lib test`, `flutter an
 
 Tes widget memeriksa identitas dan ketiga pesan SnackBar pada ukuran layar 360 × 640.
 
+Pemeriksaan Tutorial 08 dilakukan dengan Flutter 3.47.9 dan Dart 3.13.7.
+
+- Format Dart sudah diperiksa.
+- `flutter analyze` selesai dengan hasil `No issues found`.
+- `flutter test` lulus untuk tes profil dan ketiga aksi menu.
+- `flutter build web` berhasil.
+- Halaman web diperiksa pada ukuran 360 × 640. Ketiga tombol menampilkan pesan SnackBar yang sesuai ketika diklik di browser.
+
+Target yang diverifikasi adalah web. Build Android memerlukan Android SDK yang dikonfigurasi pada perangkat pengembang.
+
 ## Bantuan AI
 
 ChatGPT (OpenAI) digunakan untuk membaca panduan, menyiapkan proyek di laptop, mengimplementasikan halaman, serta membantu pengujian dan dokumentasi. Kode mengikuti pola widget pada Tutorial 08 dengan penyesuaian tata letak untuk layar kecil.
