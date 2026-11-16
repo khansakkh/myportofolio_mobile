@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  final String npm = '2406000001';
-  final String nama = 'Burhan';
-  final String kelas = 'PBP A';
+  final String npm = '2506536465';
+  final String nama = 'Khansa Khairunnisa Haikal';
+  final String kelas = 'PBP C';
 
   final List<ItemHomepage> items = [
-    ItemHomepage('Lihat Proyek', Icons.folder),
-    ItemHomepage('Tambah Proyek', Icons.add_circle),
-    ItemHomepage('Logout', Icons.logout),
+    ItemHomepage('Lihat Proyek', Icons.folder, const Color(0xFF1565C0)),
+    ItemHomepage('Tambah Proyek', Icons.add_circle, const Color(0xFF2E7D32)),
+    ItemHomepage('Logout', Icons.logout, const Color(0xFFC62828)),
   ];
 
   @override
@@ -88,10 +88,11 @@ class InfoCard extends StatelessWidget {
 }
 
 class ItemHomepage {
-  ItemHomepage(this.name, this.icon);
+  const ItemHomepage(this.name, this.icon, this.color);
 
   final String name;
   final IconData icon;
+  final Color color;
 }
 
 class ItemCard extends StatelessWidget {
@@ -101,10 +102,8 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Material(
-      color: colorScheme.secondary,
+      color: item.color,
       borderRadius: BorderRadius.circular(12),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -122,13 +121,13 @@ class ItemCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(item.icon, color: colorScheme.onSecondary, size: 30),
+              Icon(item.icon, color: Colors.white, size: 30),
               const SizedBox(height: 6),
               Flexible(
                 child: Text(
                   item.name,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: colorScheme.onSecondary),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
