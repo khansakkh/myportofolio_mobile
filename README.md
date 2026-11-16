@@ -82,4 +82,12 @@ ChatGPT (OpenAI) digunakan untuk membaca checklist tugas, membantu perubahan kod
 
 Ringkasan prompt yang digunakan: mengerjakan Tugas 7 pada proyek yang sudah ada; mencari folder proyek di laptop; membuat commit bertahap dengan pesan perubahan yang deskriptif; memeriksa hasil dan melakukan merge. Kelas PBP C diberikan langsung oleh pengguna. Identitas contoh Burhan diganti dengan identitas pemilik, dan perubahan warna mengikuti atribut model tanpa percabangan berdasarkan nama tombol.
 
-Keterbatasan: keluaran AI perlu diperiksa terhadap instruksi asli dan hasil alat pemeriksaan. Keberhasilan pemeriksaan lokal tidak membuktikan push GitHub berhasil atau hasil sudah dikumpulkan di SCELE. Tidak ada klaim bahwa perubahan hasil bantuan AI ditulis sendiri secara manual.
+Keterbatasan: keluaran AI perlu diperiksa terhadap instruksi asli dan hasil alat pemeriksaan. Keberhasilan pemeriksaan lokal tidak membuktikan push GitHub berhasil atau hasil sudah dikumpulkan di SCELE.
+
+## Hasil pemeriksaan Tugas 7
+
+- `dart format --output=none --set-exit-if-changed lib test`: lulus, tidak ada perubahan format.
+- `flutter analyze --no-pub`: **No issues found**.
+- `git diff --check`: lulus.
+- `flutter test --no-pub`: belum dapat memuat test suite karena koneksi WebSocket localhost diblokir lingkungan eksekusi (SocketException 10057); hasil ini tidak membuktikan tes aplikasi lulus atau gagal.
+- Build web Tugas 7 belum diverifikasi.
