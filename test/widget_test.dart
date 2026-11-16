@@ -14,9 +14,9 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     expect(find.text('MyPortfolio'), findsOneWidget);
-    expect(find.text('2406000001'), findsOneWidget);
-    expect(find.text('Burhan'), findsOneWidget);
-    expect(find.text('PBP A'), findsOneWidget);
+    expect(find.text('2506536465'), findsOneWidget);
+    expect(find.text('Khansa Khairunnisa Haikal'), findsOneWidget);
+    expect(find.text('PBP C'), findsOneWidget);
     expect(tester.takeException(), isNull);
 
     for (final label in ['Lihat Proyek', 'Tambah Proyek', 'Logout']) {
