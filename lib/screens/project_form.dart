@@ -29,7 +29,13 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Add Project Form')),
+        title: const Center(
+          child: Text(
+            'Add Project Form',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
@@ -86,6 +92,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButtonFormField<String>(
+                  isExpanded: true,
                   decoration: InputDecoration(
                     labelText: 'Kategori Proyek',
                     border: OutlineInputBorder(
