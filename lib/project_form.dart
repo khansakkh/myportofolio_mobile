@@ -92,7 +92,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  initialValue: _category,
+                  initialValue: 'Web Development',
                   items: _categories
                       .map(
                         (category) => DropdownMenuItem(
