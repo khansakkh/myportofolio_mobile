@@ -1,6 +1,6 @@
 # MyPortfolio Mobile
 
-Aplikasi portofolio Flutter milik Khansa Khairunnisa Haikal (2506536465), PBP C. Proyek ini melanjutkan Tutorial 08 untuk Tugas 7 PBP Gasal 2026/2027.
+Aplikasi portofolio Flutter milik Khansa Khairunnisa Haikal (2506536465), PBP C. Proyek ini melanjutkan Tutorial 08, Tugas 7, dan Tutorial 09 PBP Gasal 2026/2027.
 
 ## Menjalankan aplikasi
 
@@ -13,7 +13,32 @@ Aplikasi portofolio Flutter milik Khansa Khairunnisa Haikal (2506536465), PBP C.
 
 - Tutorial 08: memisahkan bootstrap dan tema pada `lib/main.dart` dari halaman `lib/menu.dart`; membuat InfoCard dan ItemCard serta pesan SnackBar.
 - Tugas 7: mengganti profil contoh dengan identitas pribadi dan menambahkan atribut `Color` pada ItemHomepage. Lihat Proyek memakai biru, Tambah Proyek hijau, dan Logout merah. Setiap tombol menampilkan `Kamu telah menekan tombol [Nama Tombol]!`.
-- Ketiga aksi masih berupa demonstrasi SnackBar sesuai lingkup tugas; belum membuka daftar, formulir, atau mengakhiri sesi login.
+- Tutorial 09: drawer Home/Add Project, formulir proyek, dialog hasil input, navigasi tombol Tambah Proyek, dan pemisahan halaman dari widget. Tombol Lihat Proyek dan Logout masih menampilkan SnackBar.
+
+## Tutorial 09
+
+Implementasi mengikuti urutan tutorial:
+
+1. Membuat `LeftDrawer` dengan header My Portfolio dan menu Home/Add Project. Kedua menu menggunakan `Navigator.pushReplacement`.
+2. Membuat `ProjectFormPage` sebagai `StatefulWidget` dengan `GlobalKey<FormState>`. Field nama dan deskripsi wajib diisi (spasi saja ditolak); kategori memiliki lima pilihan; teknologi dan tautan opsional.
+3. Tombol Save memvalidasi formulir dan menampilkan kelima isian dalam `AlertDialog`. Tombol OK menutup dialog dan mengosongkan input, termasuk mengembalikan kategori ke Web Development. Data belum disimpan ke database.
+4. Tombol Tambah Proyek tetap menampilkan SnackBar, kemudian membuka form menggunakan `Navigator.push`, sehingga pengguna dapat kembali ke menu sebelumnya.
+5. Memindahkan halaman melalui VS Code ke `lib/screens/` dan memisahkan `ItemCard` ke `lib/widgets/project_card.dart`, lalu menyesuaikan impor. Komponen Material diimpor dari paket `material_ui` sesuai PDF.
+
+| Berkas | Peran |
+| --- | --- |
+| `lib/main.dart` | Konfigurasi tema dan halaman awal |
+| `lib/screens/menu.dart` | Halaman utama, kartu identitas, dan model ItemHomepage |
+| `lib/screens/project_form.dart` | Form, validasi, dialog, dan reset |
+| `lib/widgets/left_drawer.dart` | Drawer navigasi bersama |
+| `lib/widgets/project_card.dart` | Kartu aksi dan navigasi Tambah Proyek |
+
+Pemeriksaan akhir Tutorial 09:
+
+- Format Dart dan `git diff --check`: lulus.
+- `flutter analyze --no-pub`: **No issues found**.
+- `flutter test --no-pub`: **4 tests passed**.
+- `flutter build web --no-pub`: berhasil menghasilkan `build/web`.
 
 ## Pemeriksaan
 
@@ -24,7 +49,7 @@ flutter test
 flutter build web
 ```
 
-Tes widget memeriksa identitas pribadi, ketiga aksi SnackBar, dan tidak adanya error tata letak pada layar 360 x 640.
+Tes widget memeriksa identitas dan aksi menu pada layar 360 x 640, navigasi push/pushReplacement, validasi input kosong/spasi, isi dialog, serta reset semua field dan kategori setelah OK.
 
 ### Tugas 7
 
