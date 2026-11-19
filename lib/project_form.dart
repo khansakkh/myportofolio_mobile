@@ -94,10 +94,12 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   ),
                   initialValue: _category,
                   items: _categories
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category),
+                        ),
+                      )
                       .toList(),
                   onChanged: (value) {
                     if (value != null) {
@@ -150,11 +152,31 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: const Text('Proyek berhasil ditambahkan!'),
+                            content: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Nama Proyek: $_projectName'),
+                                  Text('Deskripsi: $_description'),
+                                  Text('Kategori: $_category'),
+                                  Text('Teknologi: $_technologies'),
+                                  Text('Tautan: $_projectLink'),
+                                ],
+                              ),
+                            ),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                   _formKey.currentState!.reset();
+                                  setState(() {
+                                    _projectName = '';
+                                    _description = '';
+                                    _category = 'Web Development';
+                                    _technologies = '';
+                                    _projectLink = '';
+                                  });
                                 },
                                 child: const Text('OK'),
                               ),
