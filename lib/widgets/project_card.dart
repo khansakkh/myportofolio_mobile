@@ -1,6 +1,10 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard(this.item, {super.key});
@@ -14,19 +18,27 @@ class ItemCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text('Kamu telah menekan tombol ${item.name}!'),
-              ),
+        onTap: () async {
+          if (item.name == 'Lihat Proyek') {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ProjectListScreen()),
             );
+            return;
+          }
           if (item.name == 'Tambah Proyek') {
-            Navigator.push(
+            final allowed = await ensureLoggedIn(context);
+            if (!context.mounted || !allowed) return;
+            await Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProjectFormPage()),
             );
+            return;
+          }
+          if (context.read<AuthState>().isLoggedIn) {
+            await logoutAndNotify(context);
+          } else {
+            await ensureLoggedIn(context);
           }
         },
         child: Padding(
@@ -38,7 +50,10 @@ class ItemCard extends StatelessWidget {
               const SizedBox(height: 6),
               Flexible(
                 child: Text(
-                  item.name,
+                  item.name == 'Logout' &&
+                          !context.watch<AuthState>().isLoggedIn
+                      ? 'Login'
+                      : item.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                 ),

@@ -116,3 +116,64 @@ Keterbatasan: keluaran AI perlu diperiksa terhadap instruksi asli dan hasil alat
 - `git diff --check`: lulus.
 - `flutter test --no-pub`: belum dapat memuat test suite karena koneksi WebSocket localhost diblokir lingkungan eksekusi (SocketException 10057); hasil ini tidak membuktikan tes aplikasi lulus atau gagal.
 - Build web Tugas 7 belum diverifikasi.
+
+## Tutorial 10
+
+Aplikasi mengambil proyek dari Django melalui `/api/v1/projects/`. Daftar dan detail
+proyek dapat dibuka tanpa login. Menu Tambah Proyek meminta login terlebih dahulu,
+kemudian mengirim data sesuai field serializer: `title`, `description`, `tech_stack`,
+`project_url`, dan `project_image_url`.
+
+Token hanya disimpan selama aplikasi berjalan. Logout memanggil endpoint Django
+untuk mencabut token, lalu menghapus sesi lokal meskipun permintaan gagal. Jika POST
+menghasilkan 401, aplikasi meminta login ulang dan mempertahankan isian formulir.
+
+### Menjalankan
+
+Siapkan backend dari repositori `myportofolio` yang sudah mendukung Tutorial 10:
+
+```sh
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Di repositori mobile:
+
+```sh
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:8000
+```
+
+Untuk emulator Android, cukup `flutter run`; alamat bawaan adalah
+`http://10.0.2.2:8000`. Untuk backend yang sudah di-deploy, gunakan
+`--dart-define=API_BASE_URL=https://domain-backend` ketika menjalankan atau membangun
+aplikasi. Backend yang dipilih harus sudah memiliki endpoint token login dan logout.
+Gunakan akun superuser Django untuk menambahkan proyek.
+
+### Pemeriksaan dan CI
+
+```sh
+dart format --output=none --set-exit-if-changed .
+flutter analyze
+flutter test
+```
+
+Workflow `.github/workflows/ci.yml` menjalankan pemeriksaan dan generator model.
+Job `build_apk` menunggu job pemeriksaan berhasil, membangun APK release, dan
+mengunggahnya sebagai artefak `app-release-apk`. Variabel repositori `API_BASE_URL`
+dapat diisi dengan URL backend yang sudah di-deploy; nilai kosong memakai alamat
+emulator bawaan. Berkas `*.g.dart` dihasilkan ulang dan tidak masuk commit.
+
+Hasil pemeriksaan lokal Tutorial 10:
+
+- Generator JSON berhasil menghasilkan `project.g.dart`.
+- `flutter analyze --no-pub`: tidak ada masalah.
+- `dart test test/api_client_test.dart`: 6 tes lolos.
+- `flutter build web --no-pub --dart-define=API_BASE_URL=http://localhost:8000`: berhasil.
+- Backend Django: 37 tes lolos, termasuk login token, POST proyek, logout, dan CORS.
+- Tes widget sudah disesuaikan dengan alur API, tetapi pelaksanaannya terhenti sebelum
+  suite dimuat karena lingkungan eksekusi memblokir WebSocket localhost (10057).
+  Hasil ini belum membuktikan tes widget lolos; jalankan `flutter test` di lingkungan
+  tanpa pembatasan tersebut dan periksa hasil GitHub Actions setelah push.
