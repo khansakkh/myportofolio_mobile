@@ -59,6 +59,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
         token: token,
       );
       if (!mounted) return;
+      setState(() => _isSubmitting = false);
       await showDialog<void>(
         context: context,
         builder: (dialogContext) => AlertDialog(
